@@ -2,7 +2,7 @@
 
 Author: Aidaruly Diyar, group IT2-2307
 
-Spring Boot CRUD application with PostgreSQL.
+Overview: Student management service using Spring Boot and PostgreSQL database.
 Implemented: Create, Read and Update operations.
 
 ## Change description
