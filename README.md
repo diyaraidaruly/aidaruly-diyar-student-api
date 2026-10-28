@@ -2,7 +2,7 @@
 
 Author: Aidaruly Diyar, group IT2-2307
 
-Documentation: REST API for managing university students, built with Spring Boot.
+Student management REST API built with Spring Boot and PostgreSQL database.
 Implemented: Create, Read and Update operations.
 
 ## Change description
