@@ -2,7 +2,7 @@
 
 Author: Aidaruly Diyar, group IT2-2307
 
-Spring Boot CRUD application with PostgreSQL.
+Documentation: REST API for managing university students, built with Spring Boot.
 Implemented: Create, Read and Update operations.
 
 ## Change description
