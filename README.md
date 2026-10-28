@@ -1,2 +1,6 @@
 # Aidaruly Diyar Student API
-Author: Aidaruly Diyar, IT2-2307
+
+Author: Aidaruly Diyar, group IT2-2307
+
+Spring Boot CRUD application with PostgreSQL.
+Currently implemented: Create and Read operations.
