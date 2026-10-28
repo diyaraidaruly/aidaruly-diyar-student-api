@@ -15,3 +15,7 @@ backups/
 # OS
 .DS_Store
 *.swp
+
+# Secrets
+.env
+*.env
