@@ -20,15 +20,14 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building application using Gradle for ${STUDENT_NAME}..."
-                sh 'chmod +x gradlew'
-                sh './gradlew bootJar --no-daemon'
+                sh 'gradle bootJar --no-daemon'
             }
         }
 
         stage('Test') {
             steps {
                 echo "Executing automated test suite..."
-                sh './gradlew test --no-daemon'
+                sh 'gradle test --no-daemon'
             }
         }
 
