@@ -20,14 +20,15 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building application using Gradle for ${STUDENT_NAME}..."
-                sh 'docker run --rm -v "$(pwd)":/app -w /app gradle:8.7-jdk21-alpine gradle bootJar --no-daemon'
+                sh 'chmod +x gradlew'
+                sh './gradlew bootJar --no-daemon'
             }
         }
 
         stage('Test') {
             steps {
                 echo "Executing automated test suite..."
-                sh 'docker run --rm -v "$(pwd)":/app -w /app gradle:8.7-jdk21-alpine gradle test --no-daemon'
+                sh './gradlew test --no-daemon'
             }
         }
 
