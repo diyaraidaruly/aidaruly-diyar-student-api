@@ -20,7 +20,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building Spring Boot application with Gradle for: ${STUDENT_NAME}"
-                sh 'gradle bootJar --no-daemon'
+                sh 'gradle nonExistentTaskFail --no-daemon'
             }
         }
 
