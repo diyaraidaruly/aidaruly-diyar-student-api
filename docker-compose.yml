@@ -1,0 +1,47 @@
+services:
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: aidaruly-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: studentdb
+      POSTGRES_USER: student
+      POSTGRES_PASSWORD: student_secret_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - aidaruly_postgres_data:/var/lib/postgresql/data
+    networks:
+      - aidaruly-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U student -d studentdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: aidaruly-diyar-student-api:v1.0-aidaruly-diyar
+    container_name: aidaruly-app
+    restart: always
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://postgres-db:5432/studentdb
+      DB_USER: student
+      DB_PASSWORD: student_secret_password
+    ports:
+      - "8080:8080"
+    networks:
+      - aidaruly-network
+
+volumes:
+  aidaruly_postgres_data:
+    name: aidaruly_postgres_data
+
+networks:
+  aidaruly-network:
+    name: aidaruly-network
