@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo "=============================================="
-                echo "Pipeline started for student: ${STUDENT_NAME}"
+                echo "Pipeline execution started for: ${STUDENT_NAME}"
                 echo "=============================================="
                 checkout scm
             }
@@ -19,43 +19,43 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo "Building application using Gradle for ${STUDENT_NAME}..."
+                echo "Building Spring Boot application with Gradle for: ${STUDENT_NAME}"
                 sh 'gradle bootJar --no-daemon'
             }
         }
 
         stage('Test') {
             steps {
-                echo "Executing automated test suite..."
+                echo "Running automated test suite for: ${STUDENT_NAME}"
                 sh 'gradle test --no-daemon'
             }
         }
 
         stage('Docker Build') {
             steps {
-                echo "Building Docker image: ${IMAGE_NAME}:${IMAGE_TAG}"
+                echo "Building Docker image: ${IMAGE_NAME}:${IMAGE_TAG} by ${STUDENT_NAME}"
                 sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
             }
         }
 
         stage('Verify') {
             steps {
-                echo "Verifying Docker image availability..."
+                echo "Verifying Docker image availability for: ${STUDENT_NAME}"
                 sh "docker images | grep ${IMAGE_NAME}"
-                echo "SUCCESS: Docker image verified successfully by ${STUDENT_NAME}"
+                echo "SUCCESS: Docker image ${IMAGE_NAME}:${IMAGE_TAG} successfully verified by ${STUDENT_NAME}!"
             }
         }
     }
 
     post {
         always {
-            echo "Pipeline execution finished for ${STUDENT_NAME}."
+            echo "CI/CD Pipeline finished for: ${STUDENT_NAME}"
         }
         success {
-            echo "Build, test, and verification passed without errors."
+            echo "All stages (Checkout, Build, Test, Docker Build, Verify) passed successfully!"
         }
         failure {
-            echo "ERROR: Pipeline failed! Halting downstream execution."
+            echo "PIPELINE FAILED: Execution stopped due to build or test failure for: ${STUDENT_NAME}"
         }
     }
 }
